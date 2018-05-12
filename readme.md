@@ -7,14 +7,17 @@ import vuex from 'vuex-magic-class';
 ```
 
 ```
-vuex(this, 
-Object.assign({ state }, {
-    name: 'note',
+vuex(this, {
+    name: 'note', //namespace
+    state,
     dispatch: [
         'createNote',
-        'updateNote',
+        'updateNote'
     ],
-}));
+    commit: [
+        'updateState'
+    ],
+});
 ```
 
 #Example
@@ -44,6 +47,75 @@ export default class Note {
     }
 
     update() {
+        this.dispatch('note/updateNote', data);
+        this.commit('note/updateState', data);
+    }
+}
+
+
+
+# Initiate Multiple module Function
+export default class Note {
+
+    constructor(instance) {
+        
+        vuex(this, {
+           state : vuexStore
+           modules : [
+               {
+                   name: 'website',
+                   dispatch: [
+                       'createNote'
+                   ]
+               },
+               {
+                   name: 'loading',
+                   dispatch: [
+                       'loading',
+                       'loadingComplete',
+                   ],
+               }
+           ]
+        });
+    }
+
+    create(data) {
+        this.loading();
+        this.createNote(data);
+        this.loadingComplete();
+    }
+
+    update(data) {
+        this.dispatch('note/updateNote', data);
+        this.commit('note/updateState', data);
+    }
+}
+
+# Without namespace Just remove name if you dont need namespace
+export default class Note {
+
+    constructor(instance) {
+        
+        vuex(this, {
+           state : vuexStore
+           modules : [
+               {
+                  dispatch: [
+                       'createNote',
+                   ],
+                   commit: [
+                       'RESET_FORM'
+                   ]
+               }
+           ]
+        });
+    }
+
+    create(data) {
+        this.createNote(data);
+    }
+
+    update(data) {
         this.dispatch('note/updateNote', data);
         this.commit('note/updateState', data);
     }
