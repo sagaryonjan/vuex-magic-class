@@ -1,0 +1,21 @@
+{
+	"name": "vuex-magic-class",
+	"version": "1.0.1",
+	"description": "Vuex magic class helps to get vuex function in your object",
+	"license": "MIT",
+	"repository": "sagaryonjan/vuex-magic-class",
+	"author": {
+		"name": "Sagar Yonjan",
+		"email": "sagaryonjan015@gmail.com",
+		"url": "sagaryonjan.com.np"
+	},
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"vuex",
+		"vuex-magic-class",
+		"function-bind",
+		"vuex-function"
+	]
+}
